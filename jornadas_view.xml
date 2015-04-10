@@ -1,0 +1,181 @@
+<?xml version="1.0"?>
+<openerp>
+<data>
+
+    <record model="ir.ui.view" id="view_trabajadores_form">
+        <field name="name">trabajadores.form</field>
+        <field name="model">trabajadores</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="trabajadores">
+		<group col="2" colspan="4">
+                <field name="cedula" select="1"/>
+                <field name="nombre_completo" select="2"/>
+                <field name="dependencia" select="0"/>
+		</group>
+            </form>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="view_trabajadores_tree">
+        <field name="name">trabajadores.tree</field>
+        <field name="model">trabajadores</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree string="trabajadores">
+                <field name="cedula"/>
+                <field name="nombre_completo"/>
+                <field name="dependencia"/>
+
+            </tree>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="action_trabajadores">
+        <field name="name">Trabajadores</field>
+        <field name="res_model">trabajadores</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+   
+        
+    <record model="ir.ui.view" id="view_beneficiados_form">
+        <field name="name">beneficiados.form</field>
+        <field name="model">beneficiados</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="beneficiados">
+                <group col="2" colspan="4">
+		<field name="trabajadores_id" select="1"/>
+                <field name="jornadas_id" select="2" domain="[('active','=',True)]"/>
+                <field name="articulos_ids" colspan="4" select="0" domain="[('jornadas_id','=',[jornadas_id])]"/>
+                <field name="fec_compra" select="0"/>
+		</group>
+            </form>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="view_beneficiados_tree">
+        <field name="name">beneficiados.tree</field>
+        <field name="model">beneficiados</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree string="beneficiados">
+                <field name="trabajadores_id"/>
+                <field name="jornadas_id"/>
+                <field name="fec_compra"/>
+
+            </tree>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="action_beneficiados">
+        <field name="name">Beneficiados</field>
+        <field name="res_model">beneficiados</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    
+            
+    <record model="ir.ui.view" id="view_jornadas_form">
+        <field name="name">jornadasform</field>
+        <field name="model">jornadas</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="jornadas">
+		<group col="2" colspan="4">
+                <field name="codigo" select="1"/>
+                <field name="titulo" select="2"/>
+                <field name="descripcion" colspan="4" select="0"/>
+                <field name="lugar" select="0"/>
+                <field name="fecha_inicio" select="0"/>
+                <field name="fecha_culminacion" select="0"/>
+                <field name="institucion" select="0"/>
+                <field name="articulos_ids" colspan="4" nolabel="1" select="0"/>
+                <field name="responsable" select="0"/>
+                <field name="tel_responsable" select="0"/>
+                <field name="active" select="0"/>
+		</group>
+
+            </form>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="view_jornadas_tree">
+        <field name="name">jornadas.tree</field>
+        <field name="model">jornadas</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree string="jornadas">
+                <field name="codigo"/>
+                <field name="titulo"/>
+                <field name="descripcion"/>
+                <field name="lugar"/>
+                <field name="fecha_inicio"/>
+                <field name="fecha_culminacion"/>
+                <field name="institucion"/>
+                <field name="responsable"/>
+                <field name="tel_responsable"/>
+                <field name="active"/>
+
+            </tree>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="action_jornadas">
+        <field name="name">Jornadas</field>
+        <field name="res_model">jornadas</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+           
+    <record model="ir.ui.view" id="view_articulos_form">
+        <field name="name">articulos.form</field>
+        <field name="model">articulos</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="articulos">
+		<group col="2" colspan="4">
+                <field name="codigo" select="1"/>
+                <field name="nombre" select="2"/>
+                <field name="descripcion" select="0"/>
+                <field name="categoria" select="0"/>
+                <field name="jornadas_id" select="0"/>
+                <field name="beneficiados_id" select="0"/>
+		</group>
+
+            </form>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="view_articulos_tree">
+        <field name="name">articulos.tree</field>
+        <field name="model">articulos</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree string="articulos">
+                <field name="codigo"/>
+                <field name="nombre"/>
+                <field name="descripcion"/>
+                <field name="categoria"/>
+                <field name="jornadas_id"/>
+                <field name="beneficiados_id"/>
+
+            </tree>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="action_articulos">
+        <field name="name">Artículos</field>
+        <field name="res_model">articulos</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+           
+
+	<menuitem name="Jornadas" id="menu_main_jornadas" />
+ 
+	<menuitem name="Registro de Beneficiados" id="menu_registro_beneficiados" parent="menu_main_jornadas" />
+	<menuitem name="Beneficiados" id="menu_beneficiados" parent="menu_registro_beneficiados" action="action_beneficiados"/>
+ 
+	<menuitem name="Configuración" id="menu_configuracion" parent="menu_main_jornadas" />
+	<menuitem name="Trabajadores" id="menu_trabajadores" parent="menu_configuracion" action="action_trabajadores"/>
+ 	<menuitem name="Jornada" id="menu_jornadas" parent="menu_configuracion" action="action_jornadas"/>
+    <menuitem name="Artículos" id="menu_articulos" parent="menu_configuracion" action="action_articulos"/>
+
+
+     
+</data>
+</openerp>
