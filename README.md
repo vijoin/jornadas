@@ -1,0 +1,1 @@
+Módulo de Odoo v8 para la gestión de jornadas sociales y registrar quienes se benefician y con cuales productos o servicios. Este módulo puede servir para tanto para instituciones como para instancias del poder popular
