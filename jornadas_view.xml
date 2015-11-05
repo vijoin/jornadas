@@ -8,10 +8,11 @@
         <field name="type">form</field>
         <field name="arch" type="xml">
             <form string="trabajadores">
-		<group col="2" colspan="4">
+		<group col="4" colspan="2">
                 <field name="cedula" select="1"/>
                 <field name="nombre_completo" select="2"/>
                 <field name="dependencia" select="0"/>
+                <field name="cod_nomina"/>
 		</group>
             </form>
         </field>
@@ -25,6 +26,8 @@
                 <field name="cedula"/>
                 <field name="nombre_completo"/>
                 <field name="dependencia"/>
+                <field name="cod_nomina"/>
+
 
             </tree>
         </field>

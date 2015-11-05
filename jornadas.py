@@ -26,10 +26,23 @@ class trabajadores(osv.osv):
     _name = 'trabajadores'
     _rec_name = 'cedula'
     _columns = {
-        'cedula': fields.char(string="Cédula", size=8, required=True, index=True, help="Cédula del Trabajador"),
-        'nombre_completo': fields.char(string="Nombre Completo", size=80, required=True, help="Nombre Completo del Trabajador"),
-        'dependencia': fields.char(string="Dependencia", size=100, required=True, help="Dependencia del Trabajador"),
+        'cedula': fields.char(string="Cédula", size=8, index=True, help="Cédula del Trabajador"),
+        'nombre_completo': fields.char(string="Nombre Completo", size=80, help="Nombre Completo del Trabajador"),
+        'dependencia': fields.char(string="Dependencia", size=100, help="Dependencia del Trabajador"),
+        'cod_nomina': fields.char(string="Nómina", size=2, help="Código de la Nómina del Trabajador"),
     }
+
+    def name_get(self, cr, uid, ids, context={}):
+
+        res = []
+        if not ids:
+            return res
+
+        for trabajador in self.browse(cr, uid, ids, context=context):
+            res.append((trabajador.id, trabajador.cedula + ' - ' + trabajador.nombre_completo))    
+     
+        return res
+
 trabajadores()
 
 class beneficiados(osv.osv):
@@ -39,7 +52,7 @@ class beneficiados(osv.osv):
         'trabajadores_id': fields.many2one('trabajadores', 'Cédula del Trabajador', help='Cédula del trabajador beneficiado'),
         'jornadas_id': fields.many2one('jornadas', 'Jornada Activa', help='Jornada previamente definida en la configuración'),
         'articulos_ids' : fields.many2many('articulos', 'articulos_beneficiados_rel', 'beneficiados_id', 'articulos_id','Articulos a Comprar'),
-	'fec_compra': fields.datetime('Fecha de Compra'),
+        'fec_compra': fields.datetime('Fecha de Compra'),
     }
 beneficiados()
 
@@ -48,8 +61,8 @@ class jornadas(osv.osv):
     _name = 'jornadas'
     _rec_name = 'titulo'
     _columns = {
-        'codigo': fields.char('Código', size=5, required=True, help="Código único (max 5 dígitos)"),
-        'titulo': fields.char('Título', size=100, required=True, index=True, help="Título de la Jornada"),
+        'codigo': fields.char('Código', size=5, help="Código único (max 5 dígitos)"),
+        'titulo': fields.char('Título', size=100, index=True, help="Título de la Jornada"),
         'descripcion': fields.text('Descripción', help="Descripción ampliada de la Jornada"),
         'lugar': fields.char('Lugar', size=100, help="Lugar donde se realiza la jornada"),
         'fecha_inicio': fields.date('Fecha de Inicio', help="Fecha de inicio de la jornada"),
@@ -67,8 +80,8 @@ class articulos(osv.osv):
     _name = 'articulos'
     _rec_name = 'nombre'
     _columns = {
-        'codigo': fields.char("Código:", size=5, required=True, help="Código del Artículo (max 5 caracteres)"),
-        'nombre': fields.char('Nombre', size=80, required=True, index=True, help="Nombre corto para el artículo"),
+        'codigo': fields.char("Código:", size=5, help="Código del Artículo (max 5 caracteres)"),
+        'nombre': fields.char('Nombre', size=80, index=True, help="Nombre corto para el artículo"),
         'descripcion': fields.text('Descripcion', help="Descripción completa del artículo"),
         'categoria': fields.selection([('telecomunicaciones',"Telecomunicaciones"),('alimentos',"Alimentos"),('electrodomesticos',"Electrodomésticos"),('medico-asistencial',"Médico-Asistencial")], 'Categoría'),
         'jornadas_id': fields.many2one('jornadas', "Jornadas"),
