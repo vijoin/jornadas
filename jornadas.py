@@ -78,16 +78,30 @@ jornadas()
 class articulos(osv.osv):
     """Artículos"""
     _name = 'articulos'
-    _rec_name = 'nombre'
+    _rec_name = 'rubro'
     _columns = {
         'codigo': fields.char("Código", size=5, help="Código del Artículo (max 5 caracteres)"),
-        'nombre': fields.char('Nombre', size=80, index=True, help="Nombre corto para el artículo"),
-        'descripcion': fields.text('Descripcion', help="Descripción completa del artículo"),
+        'rubro': fields.char('Rubro', size=60, index=True, help="Rubro del articulo, ej: cafe, celular, camisa"),
+        'marca': fields.char('Marca', size=60, help="Marca del articulo, ej: Venezuela, Huawei, ovejita"),
+        'caracteristica': fields.char('Característica', size=200, help="500 gramos premium"),
+        'detalle_ext': fields.text('Detalle Extendido', help="Descripción completa del artículo, incluyendo su contenido si es un combo"),
         #'categoria': fields.selection([('telecomunicaciones',"Telecomunicaciones"),('alimentos',"Alimentos"),('electrodomesticos',"Electrodomésticos"),('medico-asistencial',"Médico-Asistencial")], 'Categoría'),
         'categoria_id': fields.many2one ('articulos.categorias', 'Categoria', help="Categoría a la cual pertenece el artículo"),
         'jornadas_ids': fields.many2many('jornadas', 'jornadas_articulos_rel', 'articulo_id', 'jornada_id', string="Jornadas", help="Jornadas en las que este artículo ha sido vendido"),
         'beneficiados_ids': fields.many2many('beneficiados', 'articulos_beneficiados_rel', 'articulos_id', 'beneficiados_id','Beneficiados'),
     }
+
+    def name_get(self, cr, uid, ids, context={}):
+
+        res = []
+        if not ids:
+            return res
+
+        for articulo in self.browse(cr, uid, ids, context=context):
+            res.append((articulo.id, articulo.rubro + ' ' + articulo.marca + ' ' + articulo.caracteristica))    
+     
+        return res
+
 articulos()
 
 class articulos_categorias(osv.osv):
