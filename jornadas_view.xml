@@ -132,14 +132,14 @@
         <field name="type">form</field>
         <field name="arch" type="xml">
             <form string="articulos">
-		<group col="2" colspan="4">
+        <group col="2" colspan="4">
                 <field name="codigo" select="1"/>
                 <field name="nombre" select="2"/>
                 <field name="descripcion" select="0"/>
-                <field name="categoria" select="0"/>
+                <field name="categoria_id" select="0"/>
                 <field name="jornadas_ids" select="0"/>
                 <field name="beneficiados_id" select="0"/>
-		</group>
+        </group>
 
             </form>
         </field>
@@ -153,7 +153,7 @@
                 <field name="codigo"/>
                 <field name="nombre"/>
                 <field name="descripcion"/>
-                <field name="categoria"/>
+                <field name="categoria_id"/>
                 <field name="jornadas_ids"/>
                 <field name="beneficiados_id"/>
 
@@ -163,6 +163,41 @@
     <record model="ir.actions.act_window" id="action_articulos">
         <field name="name">Artículos</field>
         <field name="res_model">articulos</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+           
+           
+    <record model="ir.ui.view" id="view_articulos_categorias_form">
+        <field name="name">articulos_categorias.form</field>
+        <field name="model">articulos.categorias</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="articulos.categorias">
+		<group col="2" colspan="4">
+                <field name="codigo" select="1"/>
+                <field name="nombre" select="2"/>
+                <field name="descripcion" select="0"/>
+		</group>
+
+            </form>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="view_articulos_categorias_tree">
+        <field name="name">articulos_categorias.tree</field>
+        <field name="model">articulos.categorias</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree string="articulos.categorias">
+                <field name="codigo"/>
+                <field name="nombre"/>
+                <field name="descripcion"/>
+            </tree>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="action_articulos_categorias">
+        <field name="name">Artículos</field>
+        <field name="res_model">articulos.categorias</field>
         <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
     </record>
@@ -177,6 +212,7 @@
 	<menuitem name="Trabajadores" id="menu_trabajadores" parent="menu_configuracion" action="action_trabajadores"/>
  	<menuitem name="Jornada" id="menu_jornadas" parent="menu_configuracion" action="action_jornadas"/>
     <menuitem name="Artículos" id="menu_articulos" parent="menu_configuracion" action="action_articulos"/>
+    <menuitem name="Categoria de Artículos" id="menu_articulos_categorias" parent="menu_configuracion" action="action_articulos_categorias"/>
 
 
      

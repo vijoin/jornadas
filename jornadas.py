@@ -27,7 +27,7 @@ class trabajadores(osv.osv):
     _rec_name = 'cedula'
     _columns = {
         'cedula': fields.char(string="Cédula", size=8, index=True, help="Cédula del Trabajador"),
-        'nombre_completo': fields.char(string="Nombre Completo", size=80, help="Nombre Completo del Trabajador"),
+        'nombre_completo': fields.char(string="Nombre Completo", size=80, index=True, help="Nombre Completo del Trabajador"),
         'dependencia': fields.char(string="Dependencia", size=100, help="Dependencia del Trabajador"),
         'cod_nomina': fields.char(string="Nómina", size=2, help="Código de la Nómina del Trabajador"),
     }
@@ -49,7 +49,7 @@ class beneficiados(osv.osv):
     """Registro de Beneficiados Inces"""
     _name = 'beneficiados'
     _columns = {
-        'trabajadores_id': fields.many2one('trabajadores', 'Cédula del Trabajador', help='Cédula del trabajador beneficiado'),
+        'trabajadores_id': fields.many2one('trabajadores', 'Cédula del Trabajador', index=True, help='Cédula del trabajador beneficiado'),
         'jornadas_id': fields.many2one('jornadas', 'Jornada Activa', help='Jornada previamente definida en la configuración'),
         'articulos_ids' : fields.many2many('articulos', 'articulos_beneficiados_rel', 'beneficiados_id', 'articulos_id','Articulos a Comprar'),
         'fec_compra': fields.datetime('Fecha de Compra'),
@@ -80,11 +80,23 @@ class articulos(osv.osv):
     _name = 'articulos'
     _rec_name = 'nombre'
     _columns = {
-        'codigo': fields.char("Código:", size=5, help="Código del Artículo (max 5 caracteres)"),
+        'codigo': fields.char("Código", size=5, help="Código del Artículo (max 5 caracteres)"),
         'nombre': fields.char('Nombre', size=80, index=True, help="Nombre corto para el artículo"),
         'descripcion': fields.text('Descripcion', help="Descripción completa del artículo"),
-        'categoria': fields.selection([('telecomunicaciones',"Telecomunicaciones"),('alimentos',"Alimentos"),('electrodomesticos',"Electrodomésticos"),('medico-asistencial',"Médico-Asistencial")], 'Categoría'),
+        #'categoria': fields.selection([('telecomunicaciones',"Telecomunicaciones"),('alimentos',"Alimentos"),('electrodomesticos',"Electrodomésticos"),('medico-asistencial',"Médico-Asistencial")], 'Categoría'),
+        'categoria_id': fields.many2one ('articulos.categorias', 'Categoria', help="Categoría a la cual pertenece el artículo"),
         'jornadas_ids': fields.many2many('jornadas', 'jornadas_articulos_rel', 'articulo_id', 'jornada_id', string="Jornadas", help="Jornadas en las que este artículo ha sido vendido"),
         'beneficiados_id': fields.many2one('beneficiados', "Beneficiados"),
     }
 articulos()
+
+class articulos_categorias(osv.osv):
+    "Categorías de Artículos"
+    _name = 'articulos.categorias'
+    _rec_name = 'nombre'
+    _columns = {
+        'codigo': fields.char("Código", size=5, help="Código de la categoría (max 5 caracteres)"),
+        'nombre': fields.char('Nombre', size=50, index=True, help="Nombre corto para la categoría"),
+        'descripcion': fields.text('Descripcion', help="Descripción completa de la categoría"),
+    }
+articulos_categorias()
