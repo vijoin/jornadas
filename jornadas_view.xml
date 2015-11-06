@@ -137,7 +137,7 @@
                 <field name="nombre" select="2"/>
                 <field name="descripcion" select="0"/>
                 <field name="categoria" select="0"/>
-                <field name="jornadas_id" select="0"/>
+                <field name="jornadas_ids" select="0"/>
                 <field name="beneficiados_id" select="0"/>
 		</group>
 
@@ -154,7 +154,7 @@
                 <field name="nombre"/>
                 <field name="descripcion"/>
                 <field name="categoria"/>
-                <field name="jornadas_id"/>
+                <field name="jornadas_ids"/>
                 <field name="beneficiados_id"/>
 
             </tree>

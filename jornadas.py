@@ -68,7 +68,7 @@ class jornadas(osv.osv):
         'fecha_inicio': fields.date('Fecha de Inicio', help="Fecha de inicio de la jornada"),
         'fecha_culminacion': fields.date('Fecha de Culminación', help="Fecha de Culminación de la Jornada"),
         'institucion': fields.char('Institución', size=50, help="Insitución que ofrece la Jornada"),
-        'articulos_ids': fields.one2many('articulos', 'jornadas_id', 'Artículos ofrecidos en la jornada', help='Predefinición de artículos que se ofrecerán en la jornada'),
+        'articulos_ids': fields.many2many('articulos', 'jornadas_articulos_rel', 'jornada_id', 'articulo_id', string="Artículos ofrecidos en la jornada", help='Predefinición de artículos que se ofrecerán en la jornada'),
         'responsable': fields.char('Responsable de la Jornada', size= 40, help='Nombre completo del responsable de la jornada'),
         'tel_responsable': fields.char('Teléfono del responsable', size=11, help='Teléfono del responsable de la jornada'),
         'active': fields.boolean('Activa'),
@@ -84,7 +84,7 @@ class articulos(osv.osv):
         'nombre': fields.char('Nombre', size=80, index=True, help="Nombre corto para el artículo"),
         'descripcion': fields.text('Descripcion', help="Descripción completa del artículo"),
         'categoria': fields.selection([('telecomunicaciones',"Telecomunicaciones"),('alimentos',"Alimentos"),('electrodomesticos',"Electrodomésticos"),('medico-asistencial',"Médico-Asistencial")], 'Categoría'),
-        'jornadas_id': fields.many2one('jornadas', "Jornadas"),
+        'jornadas_ids': fields.many2many('jornadas', 'jornadas_articulos_rel', 'articulo_id', 'jornada_id', string="Jornadas", help="Jornadas en las que este artículo ha sido vendido"),
         'beneficiados_id': fields.many2one('beneficiados', "Beneficiados"),
     }
 articulos()
