@@ -86,7 +86,7 @@ class articulos(osv.osv):
         #'categoria': fields.selection([('telecomunicaciones',"Telecomunicaciones"),('alimentos',"Alimentos"),('electrodomesticos',"Electrodomésticos"),('medico-asistencial',"Médico-Asistencial")], 'Categoría'),
         'categoria_id': fields.many2one ('articulos.categorias', 'Categoria', help="Categoría a la cual pertenece el artículo"),
         'jornadas_ids': fields.many2many('jornadas', 'jornadas_articulos_rel', 'articulo_id', 'jornada_id', string="Jornadas", help="Jornadas en las que este artículo ha sido vendido"),
-        'beneficiados_id': fields.many2one('beneficiados', "Beneficiados"),
+        'beneficiados_ids': fields.many2many('beneficiados', 'articulos_beneficiados_rel', 'articulos_id', 'beneficiados_id','Beneficiados'),
     }
 articulos()
 
