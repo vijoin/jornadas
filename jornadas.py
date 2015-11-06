@@ -48,6 +48,7 @@ trabajadores()
 class beneficiados(osv.osv):
     """Registro de Beneficiados Inces"""
     _name = 'beneficiados'
+    _rec_name = 'trabajadores_id'
     _columns = {
         'trabajadores_id': fields.many2one('trabajadores', 'Cédula del Trabajador', index=True, help='Cédula del trabajador beneficiado'),
         'jornadas_id': fields.many2one('jornadas', 'Jornada Activa', help='Jornada previamente definida en la configuración'),
@@ -98,7 +99,7 @@ class articulos(osv.osv):
             return res
 
         for articulo in self.browse(cr, uid, ids, context=context):
-            res.append((articulo.id, articulo.rubro + ' ' + articulo.marca + ' ' + articulo.caracteristica))    
+            res.append((articulo.id, str(articulo.rubro) + ' ' + str(articulo.marca) + ' ' + str(articulo.caracteristica)))    
      
         return res
 
