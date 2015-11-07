@@ -69,7 +69,7 @@ class jornadas(models.Model):
     articulos_ids = fields.Many2many('articulos', 'jornadas_articulos_rel', 'jornada_id', 'articulo_id', string="Artículos ofrecidos en la jornada", help='Predefinición de artículos que se ofrecerán en la jornada')
     responsable = fields.Char('Responsable de la Jornada', size= 40, help='Nombre completo del responsable de la jornada')
     tel_responsable = fields.Char('Teléfono del responsable', size=11, help='Teléfono del responsable de la jornada')
-    active = fields.Boolean('Activa')
+    active = fields.Boolean('Activa', default=True)
 
 
 class articulos(models.Model):
