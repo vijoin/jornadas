@@ -30,6 +30,8 @@ class Trabajadores(models.Model):
     dependencia = fields.Char(string="Dependencia", size=100, help="Dependencia del Trabajador")
     cod_nomina = fields.Char(string="Nómina", size=2, help="Código de la Nómina del Trabajador")
 
+    _sql_constraints = [('trabajador_unico', 'UNIQUE(cedula)', "Este trabajador ya existe. Cedula Repetida"),]
+
     def name_get(self, cr, uid, ids, context={}):
 
         res = []
