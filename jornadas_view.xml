@@ -46,10 +46,11 @@
         <field name="type">form</field>
         <field name="arch" type="xml">
             <form string="beneficiados">
-                <group col="2" colspan="4">
+                <group col="4" colspan="2">
                 <field name="trabajadores_id" select="1"/>
                 <field name="trab_dep" select="1" readonly="True"/>
                 <field name="jornadas_id" select="2"/>
+                <newline/>
                 <field name="articulos_ids" colspan="4" domain="[('jornadas_ids','in',[jornadas_id])]" />
                 <!--field name="articulos_ids" colspan="4"/-->
                 <field name="fec_compra" select="0"/>
@@ -85,15 +86,15 @@
         <field name="type">form</field>
         <field name="arch" type="xml">
             <form string="jornadas">
-		<group col="2" colspan="4">
+		<group col="4" colspan="2">
                 <field name="codigo" select="1"/>
                 <field name="titulo" select="2"/>
                 <field name="descripcion" colspan="4" select="0"/>
-                <field name="lugar" select="0"/>
                 <field name="fecha_inicio" select="0"/>
                 <field name="fecha_culminacion" select="0"/>
+                <field name="lugar" select="0"/>
                 <field name="institucion" select="0"/>
-                <field name="articulos_ids" colspan="4" nolabel="1" select="0"/>
+                <field name="articulos_ids" colspan="4" string="Artículos para esta Jornada" select="0"/>
                 <field name="responsable" select="0"/>
                 <field name="tel_responsable" select="0"/>
                 <field name="active" select="0"/>
@@ -135,15 +136,17 @@
         <field name="type">form</field>
         <field name="arch" type="xml">
             <form string="articulos">
-        <group col="2" colspan="4">
+        <group col="4" colspan="2">
                 <field name="codigo"/>
                 <field name="rubro"/>
                 <field name="marca"/>
                 <field name="caracteristica"/>
                 <field name="detalle_ext"/>
                 <field name="categoria_id" select="0"/>
-                <field name="jornadas_ids" select="0"/>
-                <field name="beneficiados_ids" select="0"/>
+                <newline/>
+                <field name="jornadas_ids" colspan="4" select="0"/>
+                <newline/>
+                <field name="beneficiados_ids" colspan="4" select="0"/>
         </group>
 
             </form>
@@ -179,10 +182,10 @@
         <field name="type">form</field>
         <field name="arch" type="xml">
             <form string="articulos.categorias">
-		<group col="2" colspan="4">
+		<group col="4" colspan="2">
                 <field name="codigo" select="1"/>
                 <field name="nombre" select="2"/>
-                <field name="descripcion" select="0"/>
+                <field name="descripcion" colspan="4" select="0"/>
 		</group>
 
             </form>
@@ -201,7 +204,7 @@
         </field>
     </record>
     <record model="ir.actions.act_window" id="action_articulos_categorias">
-        <field name="name">Artículos</field>
+        <field name="name">Categorías Artículos</field>
         <field name="res_model">articulos.categorias</field>
         <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
