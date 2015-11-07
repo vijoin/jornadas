@@ -48,6 +48,7 @@
             <form string="beneficiados">
                 <group col="2" colspan="4">
                 <field name="trabajadores_id" select="1"/>
+                <field name="trab_dep" select="1" readonly="True"/>
                 <field name="jornadas_id" select="2"/>
                 <field name="articulos_ids" colspan="4" domain="[('jornadas_ids','in',[jornadas_id])]" />
                 <!--field name="articulos_ids" colspan="4"/-->
@@ -63,6 +64,7 @@
         <field name="arch" type="xml">
             <tree string="beneficiados">
                 <field name="trabajadores_id"/>
+                <field name="trab_dep"/>
                 <field name="jornadas_id"/>
                 <field name="fec_compra"/>
 
