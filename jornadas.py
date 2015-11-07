@@ -51,6 +51,8 @@ class beneficiados(models.Model):
     articulos_ids = fields.Many2many('articulos', 'articulos_beneficiados_rel', 'beneficiados_id', 'articulos_id','Articulos a Comprar')
     fec_compra = fields.Datetime('Fecha de Compra')
 
+    _sql_constraints = [('beneficiario_unico', 'UNIQUE(trabajadores_id,jornadas_id)', "Este trabajador ya ha sido beneficiado en esta jornada"),]
+
 class jornadas(models.Model):
     """Definición de Jornadas"""
     _name = 'jornadas'
