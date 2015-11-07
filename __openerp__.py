@@ -22,9 +22,9 @@
 {
         "name" : "jornadas",
         "version" : "0.1",
-        "author" : "Tiny",
-        "website" : "http://openerp.com",
-        "category" : "Unknown",
+        "author" : "vijoin, BachacoVE",
+        "website" : "http://github.com/vijoin http://github.com/Bachaco-ve",
+        "category" : "Poder Popular",
         "description": """  """,
         "depends" : ['base'],
         "init_xml" : [ ],
